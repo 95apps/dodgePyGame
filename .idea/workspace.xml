@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="026e1d22-9ffe-4e2d-bbff-ad4e63512e19" name="Default" comment="v2">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dodge3.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dodge2.py" afterPath="$PROJECT_DIR$/dodge2.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,8 +32,18 @@
       <file leaf-file-name="dodge2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dodge2.py">
           <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-105">
+              <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dodge3.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dodge3.py">
+          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="371">
-              <caret line="142" column="26" lean-forward="false" selection-start-line="142" selection-start-column="26" selection-end-line="142" selection-end-column="26" />
+              <caret line="154" column="25" lean-forward="false" selection-start-line="154" selection-start-column="25" selection-end-line="154" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -55,6 +67,7 @@
         <option value="$PROJECT_DIR$/dodge.py" />
         <option value="$PROJECT_DIR$/dodge1.py" />
         <option value="$PROJECT_DIR$/dodge2.py" />
+        <option value="$PROJECT_DIR$/dodge3.py" />
       </list>
     </option>
   </component>
@@ -377,10 +390,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dodge2.py">
+    <entry file="file://$PROJECT_DIR$/dodge3.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="371">
-          <caret line="142" column="26" lean-forward="false" selection-start-line="142" selection-start-column="26" selection-end-line="142" selection-end-column="26" />
+          <caret line="154" column="25" lean-forward="false" selection-start-line="154" selection-start-column="25" selection-end-line="154" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dodge2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-105">
+          <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
           <folding />
         </state>
       </provider>
