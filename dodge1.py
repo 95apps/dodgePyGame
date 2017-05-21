@@ -36,16 +36,16 @@ sprite_rect.centery = (size[1] - 50)
 
 while keep_going:
 
-    clock.tick(120)
+    clock.tick(1000)
 
     keyinput = pygame.key.get_pressed()
+
+
 
     for ev in pygame.event.get():
         if ev.type == QUIT:
             keep_going = False
-        elif ev.type == KEYDOWN:
-            if ev.key == K_r:
-                print("r")
+
 
     if keyinput[pygame.K_LEFT] and sprite_rect.centerx > 0:
         sprite_rect.centerx -= 10
