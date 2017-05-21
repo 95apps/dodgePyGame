@@ -5,19 +5,20 @@ Submitted to ICS 3U1 - Mr. Cope
 
 dodge.py - an arcade survival game
 
-Version 3 : Spawning Asteroid Sprites
-+asteroid1.png
-+asteroid2.png
-+asteroid3.png
-+background.png
+Version 4 : Hit detection and random words from csv
 
-+spawning random asteroids
+Random words are pulled from a csv of 500k unique words.
+For loops through and strips off the comma and appends it to a list.
+
++randomwords.csv
+
 
 """
 
 import pygame
 from pygame.locals import *
 import  random
+
 
 pygame.init()
 
@@ -28,6 +29,14 @@ label = myfont.render("Some text!", 1, (123,131,0))
 size = (400, 650)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Yeah, Pygame!")
+
+randomwords = open("randomwords.csv","r")
+wordlist = []
+for i in randomwords:
+    wordlist += i.split(",")[0:-1]
+
+print(random.choice(wordlist))
+
 
 # background = pygame.Surface(size)
 # background = background.convert()
