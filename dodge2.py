@@ -40,6 +40,8 @@ sprite_rect.centery = (size[1] - 50)
 text = ""
 
 def type(text):
+   #called everytime a key is pressed
+   #reblits background everytime so that it wipes the screen
    chars = len(text)
 
    screen.blit(background, (0,0))
