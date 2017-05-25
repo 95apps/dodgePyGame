@@ -8,7 +8,10 @@ dodge.py - an arcade survival game
 Version 4 : Hit detection and random words from csv
 
 Random words are pulled from a csv of 500k unique words.
-For loops through and strips off the comma and appends it to a list.
+Loops through and strips off the comma and appends it to a list.
+
+Then using the random libary, words are randomly picked in intervals and stored in an active
+word list. In which, when the user presses enter will loop through that list and remove it.
 
 +randomwords.csv
 
@@ -32,10 +35,11 @@ pygame.display.set_caption("Yeah, Pygame!")
 
 randomwords = open("randomwords.csv","r")
 wordlist = []
+activeWordList = []
 for i in randomwords:
-    wordlist += i.split(",")[0:-1]
+    wordlist.append(i.split(",")[0:-1])
 
-print(random.choice(wordlist))
+
 
 
 # background = pygame.Surface(size)
@@ -95,11 +99,13 @@ while keep_going:
     clock.tick(60)
     print(text)
     keyinput = pygame.key.get_pressed()
-
+    print(activeWordList)
     time +=1
     if (time % 120 == 0):
         ball = Ball()
         ball_group.add(ball)
+        activeWordList+=random.choice(wordlist)
+
 
 
     for ev in pygame.event.get():
