@@ -3,7 +3,7 @@ Claudio Lamonaca and Brendan Wu
 May 6, 2017
 Submitted to ICS 3U1 - Mr. Cope
 
-dodge7.py - An arcade survival game
+Type_Crisis.py - An arcade survival game
 
 working game and menu functionality - not refined and has some graphical issues
 +Space_Age.ttf
