@@ -5,61 +5,86 @@ Submitted to ICS 3U1 - Mr. Cope
 
 dodge.py - an arcade survival game
 
-Version 4 : Hit detection and random words from csv
+Version 6 : asteroids AND text get destroyed on correct text
++ text also spawns and falls
 
-Random words are pulled from a csv of 500k unique words.
-Loops through and strips off the comma and appends it to a list.
-
-Then using the random libary, words are randomly picked in intervals and stored in an active
-word list. In which, when the user presses enter will loop through that list and remove it.
-
-+randomwords.csv
-+Asteroid image files (1,2,3,4,5,6,7,8)
-
+random word is passed in as a parameter instead of being created in the class.
 
 """
 
 import pygame
 from pygame.locals import *
-import  random
+import random
 
 
 pygame.init()
 
-myfont = pygame.font.SysFont("Arial", 15)
-label = myfont.render("Some text!", 1, (123,131,0))
-
+myfont = pygame.font.SysFont("Arial", 30)
 
 size = (400, 650)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("TYPE CRISIS")
-
-randomwords = open("randomwords.csv","r")
+randomwords = open("words.csv","r")
 wordlist = []
 activeWordList = []
+background = pygame.image.load("background.png")
+screen.blit(background, (0, 0))
+clock = pygame.time.Clock()
+text = ""
+time = 0
+keep_going = True
+
 for i in randomwords:
     wordlist.append(i.split(",")[0:-1])
 
+asteroids = ["Asteroid1.png","Asteroid2.png","Asteroid3.png","Asteroid4.png","Asteroid6.png","Asteroid7.png","Asteroid8.png"]
 
 
 
-# background = pygame.Surface(size)
-# background = background.convert()
-# background.fill((255, 255, 255))
-background = pygame.image.load("background.png")
-screen.blit(background, (0, 0))
-
-clock = pygame.time.Clock()
-keep_going = True
-
-#list used to randomly spawn different asteroid sprites
-asteroids = ["Asteroid1.png","Asteroid2.png","Asteroid3.png","Asteroid4.png","Asteroid5.png","Asteroid6.png","Asteroid7.png","Asteroid8.png"]
 
 class Ball(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self,randomWord):
+
         pygame.sprite.Sprite.__init__(self) #construct the parent component
         asteroidImage = asteroids[random.randint(0, len(asteroids)-1)] #pick a random asteroid sprite
         self.image = pygame.image.load(asteroidImage) #load randomly picked asteroid
+        self.rect = self.image.get_rect() #loads the rect from the image
+        #set the position, direction, and speed of the ball
+        self.rect.left = random.randrange(0,screen.get_width()-50)
+        self.rect.top = -100
+        self.dir_x = 0
+        self.dir_y = 1
+        self.speed = random.randrange(1,2)
+        self.word = randomWord
+
+
+    def update(self):
+        #Handle the walls by changing direction(s)
+
+        if self.rect.left < 0 or self.rect.right >= screen.get_width():
+            self.dir_x *= -1
+        if self.rect.bottom >= screen.get_height():
+            global keep_going
+            keep_going = False
+
+        self.rect.move_ip(self.speed*self.dir_x, self.speed*self.dir_y)
+
+
+        if(self.word[0] == text):
+            print("KILLLLLLLLLLLLLLLLLLLLLLLLLLLLLL")
+            self.kill()
+
+
+        else:
+            print(self.word[0])
+
+class Word(pygame.sprite.Sprite):
+    def __init__(self,randomWord):
+
+        pygame.sprite.Sprite.__init__(self) #construct the parent component
+        asteroidImage = asteroids[random.randint(0, len(asteroids)-1)] #pick a random asteroid sprite
+        self.word = randomWord
+        self.image = myfont.render(str(self.word), False, (0, 0, 0))
         self.rect = self.image.get_rect() #loads the rect from the image
         #set the position, direction, and speed of the ball
         self.rect.left = random.randrange(0,screen.get_width()-50)
@@ -72,40 +97,60 @@ class Ball(pygame.sprite.Sprite):
 
     def update(self):
         #Handle the walls by changing direction(s)
+
         if self.rect.left < 0 or self.rect.right >= screen.get_width():
             self.dir_x *= -1
         if self.rect.bottom >= screen.get_height():
-            print("gg")
-            self.kill()
+            keep_going = False
 
         self.rect.move_ip(self.speed*self.dir_x, self.speed*self.dir_y)
 
-ball_group = pygame.sprite.Group()
+
+        if(self.word[0] == text):
+            print("KILLLLLLLLLLLLLLLLLLLLLLLLLLLLLL")
+            self.kill()
 
 
-text = ""
+        else:
+            print(self.word[0])
+
+
+
 
 def type(text):
    chars = len(text)
-
    screen.blit(background, (0,0))
    font=pygame.font.SysFont("Arial",28)
    typetext=font.render(text.upper(), 1,(255,255,255))
    screen.blit(typetext, (size[0] //2 - 6.5 * chars, size[1] - 150))
+   label = myfont.render(str(seconds), 1, (255, 255, 255))
+   screen.blit(label, (4, 0))
 
-time = 0
 
+
+ball_group = pygame.sprite.Group()
+word_group = pygame.sprite.Group()
+
+
+
+seconds = 0
 while keep_going:
-
-    clock.tick(60)
-    print(text)
-    keyinput = pygame.key.get_pressed()
     print(activeWordList)
+    clock.tick(60)
+    keyinput = pygame.key.get_pressed()
     time +=1
-    if (time % 120 == 0):
-        ball = Ball()
-        ball_group.add(ball)
-        activeWordList+=random.choice(wordlist)
+    if (time% 60 == 0):
+        seconds += 1
+
+
+    if (time % 60 == 0):
+
+         randomWord = random.choice(wordlist)
+         ball = Ball(randomWord)
+         ball_group.add(ball)
+         word = Word(randomWord)
+         word_group.add(word)
+
 
 
 
@@ -191,27 +236,64 @@ while keep_going:
             elif ev.key == K_z:
                 text += "z"
                 type(text)
+            elif ev.key == K_MINUS:
+                text += "-"
+                type(text)
+            elif ev.key == K_0:
+                text += "0"
+                type(text)
+            elif ev.key == K_1:
+                text += "1"
+                type(text)
+            elif ev.key == K_2:
+                text += "2"
+                type(text)
+            elif ev.key == K_3:
+                text += "3"
+                type(text)
+            elif ev.key == K_4:
+                text += "4"
+                type(text)
+            elif ev.key == K_5:
+                text += "5"
+                type(text)
+            elif ev.key == K_6:
+                text += "6"
+                type(text)
+            elif ev.key == K_7:
+                text += "7"
+                type(text)
+            elif ev.key == K_8:
+                text += "8"
+                type(text)
+            elif ev.key == K_9:
+                text += "9"
+                type(text)
+            elif ev.key == K_0:
+                text += "0"
+                type(text)
+
+            elif ev.key == K_QUOTE:
+                text +="'"
+                type(text)
             elif ev.key == K_SPACE:
                 text += " "
                 type(text)
             elif ev.key == K_BACKSPACE:
-                #text = text[0:-1]
                 text = ""
                 type(text)
-            elif ev.key == K_RETURN:
-                for i in activeWordList:
-                    if(text == i):
-                        activeWordList.remove(i)
-                text = ""
-                type(text)
-
-
 
     ball_group.clear(screen, background)
 
     ball_group.update()
 
     ball_group.draw(screen)
+
+    word_group.clear(screen, background)
+
+    word_group.update()
+
+    word_group.draw(screen)
 
 
     pygame.display.flip()
