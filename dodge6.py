@@ -37,7 +37,7 @@ keep_going = True
 for i in randomwords:
     wordlist.append(i.split(",")[0:-1])
 
-asteroids = ["Asteroid1.png","Asteroid2.png","Asteroid3.png","Asteroid4.png","Asteroid6.png","Asteroid7.png","Asteroid8.png"]
+asteroids = ["Asteroid1.png","Asteroid2.png","Asteroid3.png","Asteroid4.png","Asteroid5.png","Asteroid6.png","Asteroid7.png"]
 
 
 

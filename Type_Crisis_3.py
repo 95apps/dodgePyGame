@@ -34,7 +34,7 @@ background = background.convert()
 pygame.display.set_caption("TYPE CRISIS")
 
 # Insert Type Crisis Logo
-logo = pygame.image.load('Logo.png')
+logo = pygame.image.load('logo.png')
 
 earth = pygame.image.load('earth.png')
 
@@ -51,11 +51,11 @@ label = myfont.render("Some text!", 1, (123, 131, 0))
 
 # Menu Font + Labels
 largefont = pygame.font.Font("Space_Age.ttf", 50)
-label_start = largefont.render("START", 1, (255, 255, 255))
-label_help = largefont.render("HELP", 2, (255, 255, 255))
-label_credits = largefont.render("CREDITS", 3, (255, 255, 255))
-label_GAME = largefont.render("GAME", 3, (255, 255, 255))
-label_OVER = largefont.render("OVER", 3, (255, 255, 255))
+label_start = largefont.render("START", 1,    white)
+label_help = largefont.render("HELP", 2,      white)
+label_credits = largefont.render("CREDITS",3, white)
+label_GAME = largefont.render("GAME", 3,      white)
+label_OVER = largefont.render("OVER", 3,      white)
 
 smallfont = pygame.font.Font("Space_Age.ttf", 25)
 label_back = smallfont.render("BACK", 3, (255, 255, 255))

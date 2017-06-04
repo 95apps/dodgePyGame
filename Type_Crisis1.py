@@ -30,7 +30,7 @@ background = background.convert()
 pygame.display.set_caption("TYPE CRISIS")
 
 #Insert Type Crisis Logo
-logo = pygame.image.load('Logo.png')
+logo = pygame.image.load('logo.png')
 
 #Ingame Music
 file = ("A Walk Into Space - Non Copyright Music [Ambient].ogg")
